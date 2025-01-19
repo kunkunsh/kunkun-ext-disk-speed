@@ -3,7 +3,7 @@
   "name": "kunkun-ext-disk-speed",
   "license": "MIT",
   "repository": "https://github.com/kunkunsh/kunkun-ext-disk-speed",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "kunkun": {
     "name": "Disk Speed",
@@ -14,7 +14,9 @@
       "type": "iconify",
       "value": "carbon:meter"
     },
-    "demoImages": [],
+    "demoImages": [
+      "https://i.imgur.com/8ISVrRe.png"
+    ],
     "permissions": [
       "dialog:all",
       {

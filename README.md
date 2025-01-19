@@ -3,4 +3,4 @@
 - NPM: https://www.npmjs.com/package/ext
 - Store: https://kunkun.sh/store/disk-speed
 
-![](./demo/disk-speed-test.png)
+![](https://i.imgur.com/8ISVrRe.png)
