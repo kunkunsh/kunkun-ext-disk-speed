@@ -1,0 +1,45 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@kunkun/api@^0.0.39": "0.0.39",
+    "npm:@types/node@*": "22.5.4",
+    "npm:kkrpc@^0.0.10": "0.0.10_typescript@5.6.3"
+  },
+  "jsr": {
+    "@kunkun/api@0.0.39": {
+      "integrity": "af1f0728083a6553279a4a7ce12ca83a6affe7dcda09b041376934e6c26e979e",
+      "dependencies": [
+        "npm:kkrpc"
+      ]
+    }
+  },
+  "npm": {
+    "@types/node@22.5.4": {
+      "integrity": "sha512-FDuKUJQm/ju9fT/SeX/6+gBzoPzlVCzfzmGkwKvRHQVxi4BntVbyIwf6a4Xn62mrvndLiml6z/UBXIdEVjQLXg==",
+      "dependencies": [
+        "undici-types"
+      ]
+    },
+    "kkrpc@0.0.10_typescript@5.6.3": {
+      "integrity": "sha512-lkQKVnN9f6JrS4ybKbGkV4mtuGhWYLTnaWx60ysytEap+sP5jcTbAuJlSrY6JqlwaohiS0X3ZbvJ2rAXYRdTng==",
+      "dependencies": [
+        "typescript",
+        "ws"
+      ]
+    },
+    "typescript@5.6.3": {
+      "integrity": "sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw=="
+    },
+    "undici-types@6.19.8": {
+      "integrity": "sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw=="
+    },
+    "ws@8.18.0": {
+      "integrity": "sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw=="
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@kunkun/api@^0.0.39"
+    ]
+  }
+}
