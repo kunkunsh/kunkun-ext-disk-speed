@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { open, path, shell, toast, ui } from "@kksh/api/ui/iframe"
+	import { open, path, shell, toast, ui } from "@kksh/api/ui/custom"
 	import { Button, ModeWatcher, ThemeWrapper, updateTheme } from "@kksh/svelte"
 	import SpeedGauge from "$lib/components/SpeedGauge.svelte"
 	import StressSelect from "$lib/components/StressSelect.svelte"

@@ -3,7 +3,7 @@
   "name": "kunkun-ext-disk-speed",
   "license": "MIT",
   "repository": "https://github.com/kunkunsh/kunkun-ext-disk-speed",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "type": "module",
   "kunkun": {
     "name": "Disk Speed",
@@ -63,7 +63,7 @@
   },
   "dependencies": {
     "@iconify/svelte": "^4.0.2",
-    "@kksh/api": "^0.0.52",
+    "@kksh/api": "^0.1.1",
     "@kksh/svelte": "0.1.7",
     "bits-ui": "^0.21.16",
     "clsx": "^2.1.1",

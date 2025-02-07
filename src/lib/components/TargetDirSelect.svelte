@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from "@iconify/svelte"
-	import { clipboard, dialog, notification, toast } from "@kksh/api/ui/iframe"
+	import { clipboard, dialog, notification, toast } from "@kksh/api/ui/custom"
 	import { Button } from "@kksh/svelte"
 	import { targetDir } from "$lib/store"
 
