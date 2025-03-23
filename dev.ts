@@ -6,7 +6,7 @@ const testPath = "./test.txt";
 const writeResult = await sequentialWriteTest(
   {
     filePath: testPath,
-    sizeInMB: 1000,
+    sizeInMB: 200,
     rounds: 10,
     bufferSizeMB: 1,
     keepTheFile: true,
