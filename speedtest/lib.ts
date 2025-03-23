@@ -64,18 +64,25 @@ export async function sequentialReadTest(
   }
 ): Promise<Progress> {
   const { filePath, rounds, deleteAfter } = options;
-  const file = await Deno.open(filePath, { read: true });
-  const reader = file.readable.getReader();
-  const start = performance.now();
   let totalMB = 0;
+  let totalDuration = 0;
 
-  let readResult;
-  while (!(readResult = await reader.read()).done) {
-    totalMB += readResult.value.length / oneMB;
+  for (let round = 0; round < rounds; round++) {
+    const file = await Deno.open(filePath, { read: true });
+    const reader = file.readable.getReader();
+    const start = performance.now();
+
+    let readResult;
+    while (!(readResult = await reader.read()).done) {
+      totalMB += readResult.value.length / oneMB;
+    }
+    const roundDuration = (performance.now() - start) / 1000;
+    totalDuration += roundDuration;
+
+    await reader.releaseLock();
   }
-  const totalDuration = (performance.now() - start) / 1000;
-  // file.close();
-  if (options.deleteAfter) {
+
+  if (deleteAfter) {
     Deno.removeSync(filePath);
   }
   return { totalMB, totalDuration };
