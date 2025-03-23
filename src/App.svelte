@@ -126,6 +126,10 @@
     <Button disabled={!$targetDir || running} on:click={startSpeedTest}>
       Start Speed Test
     </Button>
+    <small class="text-gray-500">
+      This extension's read speed may be inaccurate. Your OS may cache the test
+      data and result in a much higher speed. Will be fixed in the future.
+    </small>
     <div class="grid h-96 w-full grid-cols-2">
       <SpeedGauge
         speedInMBps={writeSpeedMBps}
