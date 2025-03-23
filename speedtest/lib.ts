@@ -1,3 +1,5 @@
+import path from "node:path";
+
 const oneMB = 1024 * 1024;
 export type Progress = { totalMB: number; totalDuration: number };
 
@@ -61,27 +63,33 @@ export async function sequentialReadTest(
     filePath: "",
     rounds: 1,
     deleteAfter: true,
-  }
+  },
+  callback?: (progress: Progress) => void
 ): Promise<Progress> {
   const { filePath, rounds, deleteAfter } = options;
+  const fileContainer = path.dirname(filePath);
+  const filename = path.basename(filePath);
+
   let totalMB = 0;
   let totalDuration = 0;
 
   for (let round = 0; round < rounds; round++) {
-    const file = await Deno.open(filePath, { read: true });
-    const reader = file.readable.getReader();
+    const tempFilePath = `${filename}_temp_${Date.now()}`;
+    const targetFilePath = path.join(fileContainer, tempFilePath);
+    Deno.copyFileSync(filePath, targetFilePath);
+    const file = await Deno.open(targetFilePath, { read: true });
+    const buffer = new Uint8Array(oneMB); // 1MB buffer
     const start = performance.now();
 
-    let readResult;
-    while (!(readResult = await reader.read()).done) {
-      totalMB += readResult.value.length / oneMB;
+    while ((await file.read(buffer)) !== null) {
+      totalMB += 1;
     }
     const roundDuration = (performance.now() - start) / 1000;
     totalDuration += roundDuration;
 
-    await reader.releaseLock();
+    Deno.removeSync(targetFilePath);
+    callback?.({ totalMB, totalDuration });
   }
-
   if (deleteAfter) {
     Deno.removeSync(filePath);
   }

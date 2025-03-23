@@ -45,7 +45,9 @@
       },
       {}
     );
-
+    command.stderr.on("data", (data) => {
+      console.warn(data);
+    });
     const api = rpcChannel.getAPI();
     const testFileName = "kk-disk-speed-test";
 
@@ -63,11 +65,16 @@
         writeSpeedMBps = totalMB / totalDuration;
       }
     );
-    const readResult = await api.sequentialReadTest({
-      filePath: testFilePath,
-      rounds: 3,
-      deleteAfter: true,
-    });
+    const readResult = await api.sequentialReadTest(
+      {
+        filePath: testFilePath,
+        rounds: 3,
+        deleteAfter: true,
+      },
+      ({ totalMB, totalDuration }) => {
+        readSpeedMBps = totalMB / totalDuration;
+      }
+    );
     writeSpeedMBps = writeResult.totalMB / writeResult.totalDuration;
 
     readSpeedMBps = readResult.totalMB / readResult.totalDuration;
@@ -126,10 +133,6 @@
     <Button disabled={!$targetDir || running} on:click={startSpeedTest}>
       Start Speed Test
     </Button>
-    <small class="text-gray-500">
-      This extension's read speed may be inaccurate. Your OS may cache the test
-      data and result in a higher or lower speed. Will be fixed in the future.
-    </small>
     <div class="grid h-96 w-full grid-cols-2">
       <SpeedGauge
         speedInMBps={writeSpeedMBps}

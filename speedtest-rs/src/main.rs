@@ -2,6 +2,12 @@ use std::fs::File;
 use std::io::{self, BufReader, Read};
 use std::time::{Instant, Duration};
 use std::path::Path;
+use std::fs;
+
+fn copy_file(src: &Path, dst: &Path) -> io::Result<()> {
+    fs::copy(src, dst)?;
+    Ok(())
+}
 
 fn read_file_speed_test(path: &Path) -> io::Result<(u64, Duration)> {
     let file = File::open(path)?;
@@ -44,21 +50,36 @@ fn format_size(bytes: u64) -> String {
 }
 
 fn main() {
-    let file_path = Path::new("/Volumes/Portable2TB/test.txt");
+    let source_path = Path::new("/Users/hk/Dev/kunkun-extension-repos/disk-speed/test.txt");
+    let copied_path = Path::new("/Users/hk/Dev/kunkun-extension-repos/disk-speed/test_copy.txt");
     
-    println!("Starting disk read speed test on: {}", file_path.display());
+    println!("Copying file to: {}", copied_path.display());
     
-    match read_file_speed_test(file_path) {
-        Ok((bytes_read, duration)) => {
-            let size = format_size(bytes_read);
-            let seconds = duration.as_secs_f64();
-            let speed = bytes_read as f64 / seconds / (1024.0 * 1024.0);
+    match copy_file(source_path, copied_path) {
+        Ok(_) => {
+            println!("Starting disk read speed test on copied file: {}", copied_path.display());
             
-            println!("Read {} in {:.2} seconds", size, seconds);
-            println!("Read speed: {:.2} MB/s", speed);
+            match read_file_speed_test(copied_path) {
+                Ok((bytes_read, duration)) => {
+                    let size = format_size(bytes_read);
+                    let seconds = duration.as_secs_f64();
+                    let speed = bytes_read as f64 / seconds / (1024.0 * 1024.0);
+                    
+                    println!("Read {} in {:.2} seconds", size, seconds);
+                    println!("Read speed: {:.2} MB/s", speed);
+                    
+                    // Clean up the copied file
+                    if let Err(e) = fs::remove_file(copied_path) {
+                        eprintln!("Error removing temporary file: {}", e);
+                    }
+                },
+                Err(e) => {
+                    eprintln!("Error testing read speed: {}", e);
+                }
+            }
         },
         Err(e) => {
-            eprintln!("Error testing read speed: {}", e);
+            eprintln!("Error copying file: {}", e);
         }
     }
 }
