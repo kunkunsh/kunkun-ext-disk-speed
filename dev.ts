@@ -1,31 +1,27 @@
-import { $ } from "bun"
-import { DiskSpeedTestInput } from "./src/model.ts"
+import { sequentialReadTest, sequentialWriteTest } from "./speedtest/lib.ts";
 
-const input: DiskSpeedTestInput = {
-	targetPath: "./testfile.dat",
-	sequential: {
-		stressFileSizeMB: 2000
-	},
-	random: {
-		stressFileSizeMB: 1000,
-		iterations: 1000,
-		blockSize: 4096
-	}
-}
-const encoded = btoa(JSON.stringify(input))
-// sequential
-;(async () => {
-	const res =
-		await $`deno run --allow-read --allow-write deno-scripts/sequential.ts ${encoded}`.quiet()
-	const stdoutSplit = res.stdout.toString("utf-8").split("\n")
-	console.log(JSON.parse(stdoutSplit[stdoutSplit.length - 2]))
-})()
+const testPath = "./test.txt";
+// const testPath = "/Volumes/Portable2TB/test.txt";
 
-// random
-;(async () => {
-	const res = await $`deno run --allow-read --allow-write deno-scripts/random.ts ${encoded}`.quiet()
-	console.log("stdout", res.stdout.toString("utf-8"))
+const writeResult = await sequentialWriteTest(
+  {
+    filePath: testPath,
+    sizeInMB: 1000,
+    rounds: 10,
+    bufferSizeMB: 1,
+    keepTheFile: true,
+  },
+  (progress) => {
+    console.log(progress);
+  }
+);
+console.log(writeResult);
+console.log(writeResult.totalMB / writeResult.totalDuration);
 
-	const stdoutSplit = res.stdout.toString("utf-8").split("\n")
-	console.log(JSON.parse(stdoutSplit[stdoutSplit.length - 2]))
-})()
+const readResult = await sequentialReadTest({
+  filePath: testPath,
+  rounds: 3,
+  deleteAfter: false,
+});
+console.log(readResult);
+console.log("read speed: ", readResult.totalMB / readResult.totalDuration);

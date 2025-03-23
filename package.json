@@ -3,7 +3,7 @@
   "name": "kunkun-ext-disk-speed",
   "license": "MIT",
   "repository": "https://github.com/kunkunsh/kunkun-ext-disk-speed",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "type": "module",
   "kunkun": {
     "name": "Disk Speed",
@@ -31,7 +31,7 @@
         "permission": "shell:deno:spawn",
         "allow": [
           {
-            "path": "$EXTENSION/deno-src/lib.ts",
+            "path": "$EXTENSION/speedtest/index.js",
             "read": "*",
             "write": "*"
           }
@@ -57,17 +57,18 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "bun build.ts",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json"
   },
   "dependencies": {
     "@iconify/svelte": "^4.0.2",
-    "@kksh/api": "^0.1.1",
+    "@kksh/api": "^0.1.7",
     "@kksh/svelte": "0.1.7",
     "bits-ui": "^0.21.16",
     "clsx": "^2.1.1",
     "echarts": "^5.5.1",
+    "kkrpc": "^0.2.2",
     "lucide-svelte": "^0.416.0",
     "tailwind-merge": "^2.4.0",
     "tailwind-variants": "^0.2.1",
@@ -89,9 +90,7 @@
   "files": [
     "dist",
     ".gitignore",
-    "deno-src",
-    "deno.json",
-    "deno.lock"
+    "speedtest/index.js"
   ],
-  "packageManager": "pnpm@9.15.3"
+  "packageManager": "pnpm@10.6.5"
 }

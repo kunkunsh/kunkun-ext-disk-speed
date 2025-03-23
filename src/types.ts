@@ -1,15 +1,12 @@
-export type Progress = { totalMB: number; totalDuration: number }
+import type {
+  createEmptyFile,
+  sequentialReadTest,
+  sequentialWriteTest,
+} from "../speedtest/lib.ts";
+
 export interface API {
-	sequentialWriteTest: (
-		options: {
-			filePath: string
-			sizeInMB: number
-			rounds: number
-			bufferSizeMB: number
-			keepTheFile?: boolean
-		},
-		callback?: (progress: Progress) => void
-	) => Promise<Progress>
-	sequentialReadTest: (filePath: string, options: { deleteAfter: boolean }) => Promise<Progress>
-	createEmptyFile: (filePath: string, sizeInMB: number) => Promise<void>
+  sequentialWriteTest: typeof sequentialWriteTest;
+  sequentialReadTest: typeof sequentialReadTest;
+  createEmptyFile: typeof createEmptyFile;
 }
+export type { Progress } from "../speedtest/lib.ts";

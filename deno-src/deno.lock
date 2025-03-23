@@ -1,45 +1,71 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@kunkun/api@^0.0.39": "0.0.39",
+    "jsr:@kunkun/api@~0.1.7": "0.1.7",
     "npm:@types/node@*": "22.5.4",
-    "npm:kkrpc@^0.0.10": "0.0.10_typescript@5.6.3"
+    "npm:kkrpc@~0.2.2": "0.2.2_typescript@5.8.2"
   },
   "jsr": {
-    "@kunkun/api@0.0.39": {
-      "integrity": "af1f0728083a6553279a4a7ce12ca83a6affe7dcda09b041376934e6c26e979e",
+    "@kunkun/api@0.1.7": {
+      "integrity": "05522131be509dce77900dfe6ba49fe478deffe73fff18970f6996b2b7c2f0f7",
       "dependencies": [
         "npm:kkrpc"
       ]
     }
   },
   "npm": {
+    "@tauri-apps/api@2.3.0": {
+      "integrity": "sha512-33Z+0lX2wgZbx1SPFfqvzI6su63hCBkbzv+5NexeYjIx7WA9htdOKoRR7Dh3dJyltqS5/J8vQFyybiRoaL0hlA=="
+    },
+    "@tauri-apps/plugin-shell@2.2.0": {
+      "integrity": "sha512-iC3Ic1hLmasoboG7BO+7p+AriSoqAwKrIk+Hpk+S/bjTQdXqbl2GbdclghI4gM32X0bls7xHzIFqhRdrlvJeaA==",
+      "dependencies": [
+        "@tauri-apps/api"
+      ]
+    },
     "@types/node@22.5.4": {
       "integrity": "sha512-FDuKUJQm/ju9fT/SeX/6+gBzoPzlVCzfzmGkwKvRHQVxi4BntVbyIwf6a4Xn62mrvndLiml6z/UBXIdEVjQLXg==",
       "dependencies": [
         "undici-types"
       ]
     },
-    "kkrpc@0.0.10_typescript@5.6.3": {
-      "integrity": "sha512-lkQKVnN9f6JrS4ybKbGkV4mtuGhWYLTnaWx60ysytEap+sP5jcTbAuJlSrY6JqlwaohiS0X3ZbvJ2rAXYRdTng==",
+    "copy-anything@3.0.5": {
+      "integrity": "sha512-yCEafptTtb4bk7GLEQoM8KVJpxAfdBJYaXyzQEgQQQgYrZiDp8SJmGKlYza6CYjEDNstAdNdKA3UuoULlEbS6w==",
       "dependencies": [
+        "is-what"
+      ]
+    },
+    "is-what@4.1.16": {
+      "integrity": "sha512-ZhMwEosbFJkA0YhFnNDgTM4ZxDRsS6HqTo7qsZM08fehyRYIYa0yHu5R6mgo1n/8MgaPBXiPimPD77baVFYg+A=="
+    },
+    "kkrpc@0.2.2_typescript@5.8.2": {
+      "integrity": "sha512-EliGFPRf+dplMiqNipPUUj89WX9vEWfQkQU05ztbMfdK/SSgnHBbvm7QySGlEIlUb9Y55dSXPkROuxjHz2JbfA==",
+      "dependencies": [
+        "@tauri-apps/plugin-shell",
+        "superjson",
         "typescript",
         "ws"
       ]
     },
-    "typescript@5.6.3": {
-      "integrity": "sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw=="
+    "superjson@2.2.2": {
+      "integrity": "sha512-5JRxVqC8I8NuOUjzBbvVJAKNM8qoVuH0O77h4WInc/qC2q5IreqKxYwgkga3PfA22OayK2ikceb/B26dztPl+Q==",
+      "dependencies": [
+        "copy-anything"
+      ]
+    },
+    "typescript@5.8.2": {
+      "integrity": "sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ=="
     },
     "undici-types@6.19.8": {
       "integrity": "sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw=="
     },
-    "ws@8.18.0": {
-      "integrity": "sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw=="
+    "ws@8.18.1": {
+      "integrity": "sha512-RKW2aJZMXeMxVpnZ6bck+RswznaxmzdULiBr6KY7XkTnW8uvt0iT9H5DkHUChXrc+uurzwa0rVI16n/Xzjdz1w=="
     }
   },
   "workspace": {
     "dependencies": [
-      "jsr:@kunkun/api@^0.0.39"
+      "jsr:@kunkun/api@~0.1.7"
     ]
   }
 }

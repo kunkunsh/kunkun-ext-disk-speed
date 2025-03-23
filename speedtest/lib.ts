@@ -1,7 +1,5 @@
-import { expose } from "@kunkun/api/runtime/deno";
-import { API, Progress } from "../src/types.ts";
-
 const oneMB = 1024 * 1024;
+export type Progress = { totalMB: number; totalDuration: number };
 
 export async function sequentialWriteTest(
   options: {
@@ -13,7 +11,7 @@ export async function sequentialWriteTest(
   },
   callback?: (progress: Progress) => void
 ): Promise<Progress> {
-//   console.error("sequentialWriteTest", options);
+  //   console.error("sequentialWriteTest", options);
   const { filePath, sizeInMB, rounds, bufferSizeMB } = options;
   const data = new Uint8Array(bufferSizeMB * oneMB); // 1MB buffer
   let start = performance.now();
@@ -59,9 +57,13 @@ export async function createEmptyFile(
 
 // Sequential Read
 export async function sequentialReadTest(
-  filePath: string,
-  options: { deleteAfter: boolean } = { deleteAfter: true }
+  options: { filePath: string; rounds: number; deleteAfter: boolean } = {
+    filePath: "",
+    rounds: 1,
+    deleteAfter: true,
+  }
 ): Promise<Progress> {
+  const { filePath, rounds, deleteAfter } = options;
   const file = await Deno.open(filePath, { read: true });
   const buffer = new Uint8Array(oneMB); // 1MB buffer
   const start = performance.now();
@@ -85,9 +87,3 @@ export function fileExists(filePath: string): boolean {
     return false;
   }
 }
-
-expose({
-  sequentialWriteTest,
-  sequentialReadTest,
-  createEmptyFile,
-} satisfies API);

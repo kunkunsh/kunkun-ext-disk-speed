@@ -23,3 +23,7 @@ extensions_support/
 
 .pnpm-store
 dist/
+
+speedtest/index.js
+test.txt
+target/
